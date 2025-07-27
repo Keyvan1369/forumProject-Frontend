@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { signUpService } from '../api/authServic'
 
 export const SignupForm = () => {
+  const [name, setname] = useState("")
+  const [email, setemail] = useState("")
+  const [password, setpassword] = useState("")
+
+
+  const forHandeler_1 = (e) => {
+    e.preventDefault()
+    signUpService(
+      name,
+      email,
+      password
+    )
+
+
+  }
+
   return (
     <div className="bg-gray-50">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -11,14 +28,15 @@ export const SignupForm = () => {
             <h1 className="text-slate-900 text-center text-3xl font-semibold">
               Singup
             </h1>
-            <form className="mt-12 space-y-6">
+            <form className="mt-12 space-y-6" onSubmit={forHandeler_1}>
               <div>
                 <label className="text-slate-900 text-sm font-medium mb-2 block">
-                  User name
+                  name
                 </label>
                 <div className="relative flex items-center">
                   <input
-                    name="username"
+                    onChange={(e) => setname(e.target.value)}
+                    name="name"
                     type="text"
                     required
                     className="w-full text-slate-900 text-sm border border-slate-300 px-4 py-3 pr-8 rounded-md outline-blue-600"
@@ -42,11 +60,13 @@ export const SignupForm = () => {
                 </label>
                 <div className="relative flex items-center">
                   <input
+                    onChange={(e) => setemail(e.target.value)}
                     name="email"
                     type="email"
                     required
                     className="w-full text-slate-900 text-sm border border-slate-300 px-4 py-3 pr-8 rounded-md outline-blue-600"
                     placeholder="Enter your email"
+
                   />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +85,8 @@ export const SignupForm = () => {
                 </label>
                 <div className="relative flex items-center">
                   <input
+                    onChange={(e) =>setpassword(e.target.value)}
+
                     name="password"
                     type="password"
                     required

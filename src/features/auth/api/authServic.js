@@ -13,3 +13,20 @@ export const loginservice = async(email, password) => {
   
   
 }
+
+
+export const signUpService = async(name,email,password) => {
+  const res = await axios.get("https://api.escuelajs.co/api/v1/users/", // get and post
+    {
+      "name":name,
+      "email":email,
+      "password":password,
+      " avatar":"https://picsum.photos/800"
+
+    }
+  )
+   const data = res.data 
+ console.log("Signup success:", data);
+ 
+}
+
