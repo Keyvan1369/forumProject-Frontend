@@ -1,17 +1,17 @@
-import React from 'react'
-import { LoginForm } from '../component/LoginForm'
-import { Header } from '../../../shared/components/Header'
-import { Footer } from '../../../shared/components/Footer'
+import React from "react";
+import { LoginForm } from "../component/LoginForm";
+import { Header } from "../../../shared/components/Header";
+import { Footer } from "../../../shared/components/Footer";
+import { AuthLayout } from "../../../shared/components/layouts/AuthLayout";
 
 export const LoginPage = () => {
   return (
     <>
-    <div><Header/></div>
-    <div><LoginForm/></div>
-    <div><Footer/></div>
-     
-      
+      <AuthLayout>
+        <div>
+          <LoginForm />
+        </div>
+      </AuthLayout>
     </>
-   
-  )
-}
+  );
+};
