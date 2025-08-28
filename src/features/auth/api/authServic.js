@@ -1,28 +1,23 @@
 import axios from "axios";
 
 export const loginservice = async (email, password) => {
-  const res = await axios.post(" https://api.escuelajs.co/api/v1/auth/login", {
+  const res = await axios.post(" http://localhost:5010/login", {
     email: email,
     password: password,
   });
-  const data = res.data;
+  return res.data;
   console.log(data);
 };
 
-export const signUpService = async (name, email, password) => {
+export const signUpService = async (newUser) => {
   try {
     const res = await axios.post(
-      "https://api.escuelajs.co/api/v1/users/", // get and post
-      {
-        name,
-        email,
-        password,
-        avatar: "https://picsum.photos/800",
-      }
+      "http://localhost:5010/signup", 
+
+      newUser
     );
     const data = res.data;
     console.log("Signup success:", data);
-
   } catch (err) {
     console.error("Signup error:", err.response?.data || err.message);
   }

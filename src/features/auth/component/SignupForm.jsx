@@ -2,19 +2,31 @@ import React, { useState } from 'react'
 import { signUpService } from '../api/authServic'
 
 export const SignupForm = () => {
-  const [name, setname] = useState("")
+ /*  const [name, setname] = useState("")
   const [email, setemail] = useState("")
-  const [password, setpassword] = useState("")
+  const [password, setpassword] = useState("") */
+  const [ newUser, setNewUser ] = useState({
+    username:"",
+    email:"",
+    password:""
+  })
 
 
   const forHandeler_1 = (e) => {
     e.preventDefault()
-    signUpService(
+  /*   signUpService(
       name,
       email,
       password
-    )
+    ) */
+   console.log(newUser)
 
+   signUpService(newUser)
+
+
+  }
+  const getValue =(e) =>{
+     setNewUser({...newUser,[e.target.name]:e.target.value})
 
   }
 
@@ -35,8 +47,8 @@ export const SignupForm = () => {
                 </label>
                 <div className="relative flex items-center">
                   <input
-                    onChange={(e) => setname(e.target.value)}
-                    name="name"
+                    onChange={getValue}
+                    name="username"
                     type="text"
                     required
                     className="w-full text-slate-900 text-sm border border-slate-300 px-4 py-3 pr-8 rounded-md outline-blue-600"
@@ -60,7 +72,7 @@ export const SignupForm = () => {
                 </label>
                 <div className="relative flex items-center">
                   <input
-                    onChange={(e) => setemail(e.target.value)}
+                    onChange={getValue}
                     name="email"
                     type="email"
                     required
@@ -85,7 +97,7 @@ export const SignupForm = () => {
                 </label>
                 <div className="relative flex items-center">
                   <input
-                    onChange={(e) =>setpassword(e.target.value)}
+                    onChange={getValue}
 
                     name="password"
                     type="password"

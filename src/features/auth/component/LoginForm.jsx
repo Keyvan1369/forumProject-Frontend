@@ -1,33 +1,32 @@
-import React, { useState } from 'react'
-import { loginservice } from '../api/authServic'
+import React, { useState } from "react";
+import { loginservice } from "../api/authServic";
 
 export const LoginForm = () => {
-  const [email, setemail] = useState("")
-  const [password, setpassword] = useState("")
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
 
-  const formHandler = (e) => {
-    e.preventDefault()
-    loginservice(
+  const formHandler = async(e) => {
+    e.preventDefault();
+    const data = await loginservice(
       email,
       password
-    )
-
-
+      );
+localStorage.setItem("token",data.token)
+localStorage.setItem("useInfo",JSON.stringify(data.user))
+  
   };
 
   return (
     <div className="bg-gray-50">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-[480px] w-full">
-
-
           <div className="p-6 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-sm">
             <h1 className="text-slate-900 text-center text-3xl font-semibold">
               Login
             </h1>
-            <form className="mt-12 space-y-6" onSubmit={formHandler} >
+            <form className="mt-12 space-y-6" onSubmit={formHandler}>
               <div>
-                <label className="text-slate-900 text-sm font-medium mb-2 block" >
+                <label className="text-slate-900 text-sm font-medium mb-2 block">
                   email
                 </label>
                 <div className="relative flex items-center">
@@ -38,8 +37,6 @@ export const LoginForm = () => {
                     className="w-full text-slate-900 text-sm border border-slate-300 px-4 py-3 pr-8 rounded-md outline-blue-600"
                     placeholder="Enter your email"
                     onChange={(e) => setemail(e.target.value)}
-
-
                   />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -124,5 +121,5 @@ export const LoginForm = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
