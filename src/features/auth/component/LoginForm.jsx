@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { loginservice } from "../api/authServic";
+import { useNavigate } from "react-router";
 
 export const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const navigate = useNavigate()
 
-  const formHandler = async(e) => {
+  const formHandler = async (e) => {
     e.preventDefault();
-    const data = await loginservice(
-      email,
-      password
-      );
-localStorage.setItem("token",data.token)
-localStorage.setItem("useInfo",JSON.stringify(data.user))
-  
+    const data = await loginservice(email, password);
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("useInfo", JSON.stringify(data.user));
+    navigate("/home");
   };
 
   return (
