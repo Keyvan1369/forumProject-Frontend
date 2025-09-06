@@ -8,11 +8,11 @@ export const HomeForm = () => {
    
   return (
     <div className="bg-gray-100 min-h-screen text-gray-800">
-      {/* Top Bar */}
+      
       
 
       <div className="flex">
-        {/* Sidebar */}
+        
         <aside className="w-64 bg-white border-r p-6 hidden lg:block">
           <nav className="space-y-4 text-sm">
             <div className="text-gray-500 font-semibold mb-2">MENU</div>

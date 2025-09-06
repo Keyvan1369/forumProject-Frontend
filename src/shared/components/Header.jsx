@@ -1,33 +1,42 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
+import { login } from "../../redux/slice/authSlice";
 
 export const Header = () => {
-  const [isLogged, setIsLogged] = useState(false);
+  /* const [isLogged, setIsLogged] = useState(false); */
+  const isLogged = useSelector((state)=>state.authReducer.isLogged)
+  const [user, setUser] = useState(null);
+  const dispatcher = useDispatch()
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setIsLogged(true);
+    const token = localStorage.getItem("token");
+    if (token) {
+     /*  setIsLogged(true); */
+     
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      if (userInfo) {
+        dispatcher(login(userInfo))
+        
+      }
     }
   }, []);
- 
-    if (localStorage.getItem("token")) {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"))
-      setUser(false);
-    }
 
-   if(localStorage.removeItem("userInfo")) {
-
-   }
-    const logout = () => {
-   
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userInfo");
+ /*    setIsLogged(false); */
+ dispatcher(logout())
+    
   };
+
   return (
     <div>
       <header className="flex justify-between items-center px-6 py-4 bg-white shadow">
         <h1 className="text-xl font-bold">alemhelp</h1>
         {isLogged ? (
           <div>
-            <span>Hello</span>
+            <span className="me-3">Hello {user.username}</span>
             <button
               onClick={logout}
               className="bg-gray-100 px-4 py-2 rounded border hover:bg-gray-200"
